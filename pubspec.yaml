@@ -1,0 +1,71 @@
+name: money_app
+description: Money application
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.17.5 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Core
+  get: ^4.6.5
+
+  # Local storage
+  get_storage: ^2.0.3
+
+  # UI
+  google_fonts: ^6.2.1
+  flutter_svg: ^1.1.1+1
+  overlay_support: ^2.0.1
+  cupertino_icons: ^1.0.5
+  concentric_transition: ^1.0.3
+  lottie: ^3.0.0
+  # Utils
+  intl: ^0.17.0
+  
+  fluttertoast: ^8.2.4
+
+  url_strategy: ^0.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.1
+  flutter_launcher_icons: ^0.13.1
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: 'assets/playstore-icon.png'
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/svg/
+
+  fonts:
+     - family: Schyler
+       fonts:
+         - asset: assets/fonts/Courgette-Regular.ttf
+  #       - asset: fonts/Schyler-Italic.ttf
+  #         style: italic
+     - family: Exo 
+       fonts:
+         - asset: assets/fonts/Exo.ttf
+     - family: Rubik 
+       fonts:
+         - asset: assets/fonts/Rubik.ttf 
+     - family: Micro5 
+       fonts:
+         - asset: assets/fonts/Micro5.ttf
+     - family: Jolly 
+       fonts:
+         - asset: assets/fonts/Jolly.ttf   
+     - family: Protest 
+       fonts:
+         - asset: assets/fonts/Protest.ttf 
