@@ -49,4 +49,17 @@ class StringsKeys {
   static const String october = 'october';
   static const String november = 'november';
   static const String december = 'december';
+
+  static const String setting = 'settings';
+  static const String privacy = 'privacy';
+  static const String about = 'about';
+
+  static const String FullName = 'Abdenour';
+  static const String more = 'more';
+  static const String selectlanguage = 'select language';
+  static const String seolecttheme = 'select theme';
+  static const String currency = 'da';
+
+
+
 }

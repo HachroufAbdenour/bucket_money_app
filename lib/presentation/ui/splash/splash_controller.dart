@@ -10,9 +10,9 @@ class SplashController extends GetxController {
   }
 
   void start() async {
-    await delayedFunc(milliseconds: 1400);
+    await delayedFunc(milliseconds: 3590);
     goTransactions();
   }
 
   void goTransactions() => Get.toNamed(AppRoutes.onBording);
-}
+                     }

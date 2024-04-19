@@ -73,6 +73,7 @@ class TransactionsController extends GetxController {
       );
       if (res == ScreenEnums.refresh) {
         onInit();
+        
       }
     }
   }

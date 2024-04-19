@@ -2,6 +2,7 @@ class AppValues {
   /// Lang Code en
   static const String langCodeEN = 'en';
   static const String langCodeAR = 'ar';
+  static const String langCodeFR = 'fr';
 
   /// Status top up
   static const String transactionPay = 'pay';

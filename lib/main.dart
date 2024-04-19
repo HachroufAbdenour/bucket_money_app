@@ -2,9 +2,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:money_app/data/local_storage/local_storage.dart';
+import 'package:money_app/data/repositories/account_repository.dart';
+import 'package:money_app/data/repositories/transactions_repository.dart';
+import 'package:money_app/domain/repositories/account_repository_impl.dart';
+import 'package:money_app/domain/repositories/transactions_repository_impl.dart';
 import 'package:money_app/presentation/bindings/global_binding.dart';
 import 'package:money_app/presentation/router/router.dart';
 import 'package:money_app/presentation/router/routes.dart';
+import 'package:money_app/presentation/ui/splash/splash_screen.dart';
+import 'package:money_app/presentation/ui/transactions/transactions_controller.dart';
+import 'package:money_app/presentation/ui/transactions/transactions_screen.dart';
 import 'package:money_app/shared/constants/app_values.dart';
 import 'package:money_app/shared/localization/keys.dart';
 import 'package:money_app/shared/localization/translations.dart';
@@ -18,7 +26,7 @@ void main() async {
   if (kIsWeb) {
     setPathUrlStrategy();
   }
-  runApp(const MoneyApp());
+  runApp( MoneyApp());
 }
 
 class ThemeController extends ChangeNotifier {
@@ -35,35 +43,47 @@ class ThemeController extends ChangeNotifier {
 }
 
 
-
-
-
-
-
-
-
-
-
-
 class MoneyApp extends StatelessWidget {
-  const MoneyApp({Key? key}) : super(key: key);
+  final LocalStorage localStorage = Get.put(LocalStorage());
 
   @override
-    Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return OverlaySupport.global(
-      child: GetMaterialApp(
-        navigatorKey: Get.key,
-        getPages: AppRouter.routes,
-        initialRoute: AppRoutes.splash,
-        title: StringsKeys.moneyApp.tr,
-        initialBinding: GlobalBinding(),
-        translations: AppTranslations(),
-        locale: const Locale(AppValues.langCodeEN),
-        theme: AppThemes.getTheme(false),
-        debugShowCheckedModeBanner: false,
+      child: FutureBuilder<bool>(
+        future: localStorage.getIsFirstTime(), // Get the isFirstTime flag
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            // If the future is still loading, return a loading indicator or splash screen
+            return SplashScreen();
+          } else if (snapshot.hasError) {
+            // If an error occurred while fetching the flag, handle it here
+            return Scaffold(
+              body: Center(
+                child: Text('Error loading isFirstTime flag'),
+              ),
+            );
+          } else {
+            // If the flag is successfully loaded, determine the initial route
+            final bool isFirstTime = snapshot.data ?? true;
+            return GetMaterialApp(
+              navigatorKey: Get.key,
+              getPages: AppRouter.routes,
+              title: StringsKeys.moneyApp.tr,
+              translations: AppTranslations(),
+              locale: Locale(localStorage.languageCode.value),
+              theme: AppThemes.getTheme(false),
+              debugShowCheckedModeBanner: false,
+              initialRoute: isFirstTime ? '/onBoard' : '/transactions',
+              initialBinding: BindingsBuilder(() {
+                Get.lazyPut<LocalStorage>(() => LocalStorage(), fenix: true);
+                Get.lazyPut<AccountRepository>(() => AccountRepositoryImpl(Get.find<LocalStorage>()), fenix: true);
+                Get.lazyPut<TransactionsRepository>(() => TransactionsRepositoryImpl(Get.find<LocalStorage>()), fenix: true);
+                Get.put(TransactionsController(Get.find<LocalStorage>(), Get.find<AccountRepository>(), Get.find<TransactionsRepository>()));
+              }),
+            );
+          }
+        },
       ),
     );
   }
-
-
 }

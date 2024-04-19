@@ -16,6 +16,8 @@ dependencies:
   # Local storage
   get_storage: ^2.0.3
 
+  image_picker: ^1.0.8
+
   # UI
   google_fonts: ^6.2.1
   flutter_svg: ^1.1.1+1
@@ -23,6 +25,8 @@ dependencies:
   cupertino_icons: ^1.0.5
   concentric_transition: ^1.0.3
   lottie: ^3.0.0
+  url_launcher: ^6.0.0
+  
   # Utils
   intl: ^0.17.0
   
@@ -47,6 +51,8 @@ flutter:
   assets:
     - assets/
     - assets/svg/
+    - assets/images/
+    - assets/lotties/
 
   fonts:
      - family: Schyler

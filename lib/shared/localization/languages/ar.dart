@@ -1,7 +1,7 @@
 import 'package:money_app/shared/localization/keys.dart';
 
 const Map<String, String> ar = <String, String>{
-  StringsKeys.moneyApp: 'تطبيق المال',
+  StringsKeys.moneyApp: 'ادارة المال ',
   StringsKeys.pay: 'دفع',
   StringsKeys.topUp: 'شحن',
   StringsKeys.somethingWentWrong: 'حدث خطأ ما...',
@@ -50,4 +50,15 @@ const Map<String, String> ar = <String, String>{
   StringsKeys.october: 'أكتوبر',
   StringsKeys.november: 'نوفمبر',
   StringsKeys.december: 'ديسمبر',
+
+ StringsKeys.setting: 'الإعدادات',
+  StringsKeys.FullName: 'الإسم الكامل',
+  StringsKeys.about: 'حول التطبيق',
+  StringsKeys.privacy: 'الخصوصية',
+  StringsKeys.more: 'المزيد',
+  StringsKeys.selectlanguage: 'اختر اللغة',
+  StringsKeys.seolecttheme: 'اختر النسق',
+
+
+StringsKeys.currency : 'دج',
 };

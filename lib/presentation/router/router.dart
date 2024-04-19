@@ -15,13 +15,13 @@ class AppRouter {
   static final List<GetPage> routes = <GetPage>[
     GetPage(
       name: AppRoutes.splash,
-      page: () => const SplashScreen(),
+      page: () =>  SplashScreen(),
       binding: SplashBinding(),
       transition: _transition(),
     ),
     GetPage(
       name: AppRoutes.transactions,
-      page: () => const TransactionsScreen(),
+      page: () =>  TransactionsScreen(),
       binding: TransactionsBinding(),
       transition: _transition(),
     ),
@@ -39,7 +39,7 @@ class AppRouter {
     ),
         GetPage(
       name: AppRoutes.onBording,
-      page: () =>  MyConcentricTransition(),
+      page: () =>  OnboardView(),
       transition: _transition(),
     ),
   ];

@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:money_app/shared/constants/app_values.dart';
 import 'package:money_app/shared/localization/languages/en.dart';
 import 'package:money_app/shared/localization/languages/ar.dart';
+import 'package:money_app/shared/localization/languages/fr.dart';
 
 
 
@@ -11,5 +12,6 @@ class AppTranslations extends Translations {
   Map<String, Map<String, String>> get keys => {
     AppValues.langCodeEN: en,
     AppValues.langCodeAR: ar,
+    AppValues.langCodeFR: fr,
   };
 }

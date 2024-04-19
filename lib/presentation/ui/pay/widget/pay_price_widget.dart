@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:money_app/shared/localization/keys.dart';
 
 class PayPriceWidget extends StatelessWidget {
   final RxString price;
@@ -20,7 +21,7 @@ class PayPriceWidget extends StatelessWidget {
             TextSpan(
               children: [
                 TextSpan(
-                  text: 'LE',
+                  text: StringsKeys.currency.tr,
                   style: Get.textTheme.displayLarge?.copyWith(
                     fontSize: 25,
                     height: 2.4,
