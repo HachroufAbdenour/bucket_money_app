@@ -20,7 +20,7 @@ static final LocalStorage _instance = LocalStorage._internal();
 
   Future<bool> getIsFirstTime() async {
     final box = GetStorage();
-    return box.read(_isFirstTimeKey) ?? false;
+    return box.read(_isFirstTimeKey) ?? true;
   }
 
   

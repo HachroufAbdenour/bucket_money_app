@@ -9,7 +9,20 @@ import 'package:money_app/data/local_storage/local_storage.dart';
 import 'package:money_app/presentation/ui/transactions/transactions_screen.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:money_app/presentation/ui/onBording/widget/custom_textfield.dart';
+import 'package:money_app/shared/styles/colors.dart';
 
+
+void getImage(File? _image, Function(File) setImage) async {
+  final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+  if (pickedFile != null) {
+    final image = File(pickedFile.path);
+    setImage(image);
+    GetStorage().write('image', pickedFile.path); // Save image path to storage
+  } else {
+    print('No image selected.');
+  }
+}
 class OnboardView extends StatefulWidget {
   @override
   _OnboardViewState createState() => _OnboardViewState();
@@ -21,13 +34,17 @@ class _OnboardViewState extends State<OnboardView> {
   final List<Widget> _pages = [
     OnboardingPage1(),
     OnboardingPage2(),
+          OnboardingPage3(),
+              OnboardingPage4(),
+
+
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Onboarding Demo'),
+        title: Text(''),
       ),
       body: Stack(
         children: [
@@ -82,7 +99,7 @@ class _OnboardViewState extends State<OnboardView> {
       height: 8.0,
       width: isActive ? 24.0 : 8.0,
       decoration: BoxDecoration(
-        color: isActive ? Colors.blue : Colors.grey,
+        color: isActive ? Colors.white : Color.fromARGB(255, 225, 220, 220),
         borderRadius: BorderRadius.circular(12),
       ),
     );
@@ -94,35 +111,30 @@ class OnboardingPage1 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.blue,
-      child: Center(
-        child: Lottie.asset('assets/Animation4.json', width: 300),
+      child: Column(
+        children: [
+          Text("Welcome to Money Manangement "),
+          Center( 
+            child: Lottie.asset('assets/Animationa.json', width: 400),
+          ),
+        ],
       ),
     );
   }
 }
 
+
 class OnboardingPage2 extends StatefulWidget {
   @override
-  State<OnboardingPage2> createState() => _OnboardingPage2State();
+  State<OnboardingPage2> createState() => OnboardingPage2State();
 }
 
-class _OnboardingPage2State extends State<OnboardingPage2> {
+class OnboardingPage2State extends State<OnboardingPage2> {
   final TextEditingController _fullNameController = TextEditingController();
   File? _image;
   final _storage = GetStorage();
 
-  Future getImage() async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-
-    setState(() {
-      if (pickedFile != null) {
-        _image = File(pickedFile.path);
-        _storage.write('image', pickedFile.path); // Save image path to storage
-      } else {
-        print('No image selected.');
-      }
-    });
-  }
+ 
 
   void _saveFullName(String fullName) {
     _storage.write('fullName', fullName); // Save full name to storage
@@ -131,14 +143,15 @@ class _OnboardingPage2State extends State<OnboardingPage2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blue,
+      color:  AppColors.primary,
       child: Center(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Text(
               "Enter your full name",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white,fontSize: 25, fontWeight: FontWeight.bold,),
             ),
             SizedBox(height: 25),
             CustomTextField(
@@ -149,15 +162,66 @@ class _OnboardingPage2State extends State<OnboardingPage2> {
               textCapitalization: TextCapitalization.words,
               inputType: TextInputType.text,
             ),
+         
+
+
+          
+            ElevatedButton(
+              onPressed: () {
+                _saveFullName(_fullNameController.text);
+LocalStorage().setIsFirstTime(false);              },
+              child: Text('Save Full'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class OnboardingPage3 extends StatefulWidget {
+  @override
+  OnboardingPage3State createState() => OnboardingPage3State();
+}
+
+class OnboardingPage3State extends State<OnboardingPage3> {
+  final TextEditingController _fullNameController = TextEditingController();
+  File? _image;
+  final _storage = GetStorage();
+
+ 
+
+  
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color:  AppColors.primary,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+          
             Text(
               "Select your image for your Profile",
               style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 15),
-            GestureDetector(
-              onTap: getImage,
+         
+
+
+          GestureDetector(
+              onTap: () {
+                getImage(_image, (image) {
+                  setState(() {
+                    _image = image;
+                  });
+                });
+              },
               child: Container(
-                color: Colors.blue,
+                color: AppColors.primary,
                 child: Center(
                   child: _image == null
                       ? Text('Tap to select profile photo')
@@ -170,12 +234,29 @@ class _OnboardingPage2State extends State<OnboardingPage2> {
             ),
             ElevatedButton(
               onPressed: () {
-                _saveFullName(_fullNameController.text);
 LocalStorage().setIsFirstTime(false);              },
               child: Text('Save Full'),
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+
+class OnboardingPage4 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.blue,
+      child: Column(
+        children: [
+          Text("Welcome to Money Manangement "),
+          Center( 
+            child: Lottie.asset('assets/Animationa.json', width: 400),
+          ),
+        ],
       ),
     );
   }

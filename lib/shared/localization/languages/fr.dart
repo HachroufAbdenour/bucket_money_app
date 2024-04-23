@@ -61,4 +61,8 @@ const Map<String, String> fr = <String, String>{
 
    StringsKeys.currency : 'da',
 
+    StringsKeys.deleteConfirmation : 'Suprimmer Confirmation',
+ StringsKeys.delete : 'Suprimmer',
+StringsKeys.areyousureyouwanttodelete:'tu a sur to Suprimmer  ',
+
 };

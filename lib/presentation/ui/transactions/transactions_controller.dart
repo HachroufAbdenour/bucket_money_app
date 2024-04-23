@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:money_app/data/local_storage/local_storage.dart';
 import 'package:money_app/data/repositories/account_repository.dart';
 import 'package:money_app/data/repositories/transactions_repository.dart';
@@ -12,6 +16,31 @@ class TransactionsController extends GetxController {
   final LocalStorage _storage;
   final AccountRepository _accountRepository;
   final TransactionsRepository _transactionsRepository;
+
+  var _image = Rx<File?>(null);
+  
+  File? get image => _image.value;
+  
+  void setImage(File? file) {
+    _image.value = file;
+  }
+    Future<void> getImage() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      final image = File(pickedFile.path);
+      setImage(image);
+      GetStorage().write('image', pickedFile.path); // Save image path to storage
+    } else {
+      print('No image selected.');
+    }
+  }
+
+
+final _storagee = GetStorage();
+ // Define an observable variable to hold the path of the selected image
+  RxString imagePath = ''.obs;
+
 
   TransactionsController(
     this._storage,
@@ -32,6 +61,7 @@ class TransactionsController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+      imagePath.value = _storagee.read('image') ?? '';
     screenEnum = ScreenEnums.loading;
     await Future.wait([
       getAccountData(),
@@ -41,6 +71,12 @@ class TransactionsController extends GetxController {
     if (account == null) {
       screenEnum = ScreenEnums.error;
     }
+  }
+
+ // Function to set the selected image path
+  void setImagePath(String newPath) {
+    imagePath.value = newPath;
+    _storagee.write('image', newPath); // Save image path to storage
   }
 
   Future<void> getAccountData() async {

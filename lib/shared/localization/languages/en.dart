@@ -62,6 +62,9 @@ const Map<String, String> en = <String, String>{
  StringsKeys.seolecttheme : 'select theme',
 
  StringsKeys.currency : 'da',
-
+ 
+ StringsKeys.deleteConfirmation : 'Delete Confirmation',
+ StringsKeys.delete : 'Delete',
+StringsKeys.areyousureyouwanttodelete:'Are you sure you want to delete?',
 
 };

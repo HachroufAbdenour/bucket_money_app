@@ -61,5 +61,12 @@ class StringsKeys {
   static const String currency = 'da';
 
 
+ static const String areyousureyouwanttodelete='Are you sure you want to delete ? ';
+  static const String deleteConfirmation = 'Delete Confirmation';
+  static const String delete = 'Delete';
+
+
+
+
 
 }

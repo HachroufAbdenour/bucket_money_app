@@ -73,7 +73,7 @@ class MoneyApp extends StatelessWidget {
               locale: Locale(localStorage.languageCode.value),
               theme: AppThemes.getTheme(false),
               debugShowCheckedModeBanner: false,
-              initialRoute: isFirstTime ? '/onBoard' : '/transactions',
+              initialRoute: isFirstTime ? '/' : '/transactions',
               initialBinding: BindingsBuilder(() {
                 Get.lazyPut<LocalStorage>(() => LocalStorage(), fenix: true);
                 Get.lazyPut<AccountRepository>(() => AccountRepositoryImpl(Get.find<LocalStorage>()), fenix: true);

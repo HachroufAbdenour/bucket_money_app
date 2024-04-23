@@ -61,4 +61,8 @@ const Map<String, String> ar = <String, String>{
 
 
 StringsKeys.currency : 'دج',
+
+StringsKeys.deleteConfirmation : 'تأكيد الحذف',
+StringsKeys.delete : 'حذف',
+StringsKeys.areyousureyouwanttodelete:'  هل انت متاكد من انك تريجلحذف',
 };
