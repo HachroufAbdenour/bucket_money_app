@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
@@ -43,9 +42,7 @@ class _OnboardViewState extends State<OnboardView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(''),
-      ),
+  
       body: Stack(
         children: [
           PageView.builder(
@@ -109,15 +106,59 @@ class _OnboardViewState extends State<OnboardView> {
 class OnboardingPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: Column(
-        children: [
-          Text("Welcome to Money Manangement "),
-          Center( 
-            child: Lottie.asset('assets/Animationa.json', width: 400),
+    return SafeArea(
+      child: Container(
+       color: Colors.white,
+         child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Text("Money Manangement ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.black),),
+             SizedBox(height: 30,),
+              Center( 
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Container(
+                  padding: EdgeInsets.only(top: 30),
+                  height: 350,
+                  width: 300,
+                  decoration: BoxDecoration(  
+                  borderRadius: BorderRadius.circular(10),
+                  color: Color.fromARGB(255, 38, 0, 255),
+                ),
+                child: Column(
+                  children: [
+                
+                Text("Gettings Started ",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 22 ),),
+                SizedBox(height: 30,),
+                Text("Follow all the steps to complete ",style: TextStyle(color: Colors.white,fontSize: 14 ),),
+                Text("the verification process",style: TextStyle(color: Colors.white,fontSize: 14 ),),
+                SizedBox(height: 20,),
+                Text("this will help us confirm ",style: TextStyle(color: Colors.white,fontSize: 14 ),),
+                Text("its really You ",style: TextStyle(color: Colors.white,fontSize: 14 ),),
+                
+                
+                SizedBox(height: 40,),
+                
+                ElevatedButton(
+                          child: Text("Start > ",style: TextStyle(color: Colors.black,fontSize: 24,fontWeight: FontWeight.bold),),
+                          style: ElevatedButton.styleFrom(
+                            foregroundColor: Colors.white,
+                            elevation: 0,
+                          ),
+                          onPressed: () {},
+                        ),
+                
+                
+                
+                  ],
+                ),
+                ),
+              ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

@@ -64,5 +64,5 @@ StringsKeys.currency : 'دج',
 
 StringsKeys.deleteConfirmation : 'تأكيد الحذف',
 StringsKeys.delete : 'حذف',
-StringsKeys.areyousureyouwanttodelete:'  هل انت متاكد من انك تريجلحذف',
+StringsKeys.areyousureyouwanttodelete:'  هل انت متاكد من انك تريد الحذف',
 };
