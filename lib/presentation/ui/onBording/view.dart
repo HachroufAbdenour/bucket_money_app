@@ -111,8 +111,11 @@ class OnboardingPage1 extends StatelessWidget {
        color: Colors.white,
          child: Center(
           child: Column(
+
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+                         SizedBox(height: 40,),
+
               Text("Money Manangement ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24,color: Colors.black),),
              SizedBox(height: 30,),
               Center( 
@@ -123,8 +126,9 @@ class OnboardingPage1 extends StatelessWidget {
                   height: 350,
                   width: 300,
                   decoration: BoxDecoration(  
-                  borderRadius: BorderRadius.circular(10),
-                  color: Color.fromARGB(255, 38, 0, 255),
+                    
+                  borderRadius: BorderRadius.circular(20),
+        color:  AppColors.primary,
                 ),
                 child: Column(
                   children: [
@@ -140,14 +144,25 @@ class OnboardingPage1 extends StatelessWidget {
                 
                 SizedBox(height: 40,),
                 
-                ElevatedButton(
-                          child: Text("Start > ",style: TextStyle(color: Colors.black,fontSize: 24,fontWeight: FontWeight.bold),),
-                          style: ElevatedButton.styleFrom(
-                            foregroundColor: Colors.white,
-                            elevation: 0,
-                          ),
-                          onPressed: () {},
-                        ),
+             ElevatedButton(
+            onPressed: () {
+              // Add your onPressed functionality here
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
+            ),
+            child: Text(
+              'Start >',
+              style: TextStyle(fontSize: 20),
+            ),
+          ),
+
+
                 
                 
                 
@@ -183,37 +198,54 @@ class OnboardingPage2State extends State<OnboardingPage2> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color:  AppColors.primary,
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text(
-              "Enter your full name",
-              style: TextStyle(color: Colors.white,fontSize: 25, fontWeight: FontWeight.bold,),
+    return SafeArea(
+      child: Container(
+        color:  AppColors.primary,
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(50.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text(
+                  "Enter your full name",
+                  style: TextStyle(color: Colors.white,fontSize: 25, fontWeight: FontWeight.bold,),
+                ),
+                SizedBox(height: 25),
+                CustomTextField(
+                  controller: _fullNameController,
+                  name: 'Full Name',
+                  prefixIcon: Icons.person,
+                  obscureText: false,
+                  textCapitalization: TextCapitalization.words,
+                  inputType: TextInputType.text,
+                ),
+             
+                  
+                     ElevatedButton(
+            onPressed: () {
+   _saveFullName(_fullNameController.text);
+                  LocalStorage().setIsFirstTime(false);                 },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              padding: EdgeInsets.symmetric(horizontal: 80, vertical: 16),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(14),
+              ),
             ),
-            SizedBox(height: 25),
-            CustomTextField(
-              controller: _fullNameController,
-              name: 'Full Name',
-              prefixIcon: Icons.person,
-              obscureText: false,
-              textCapitalization: TextCapitalization.words,
-              inputType: TextInputType.text,
+            child: Text(
+              'Save >',
+              style: TextStyle(fontSize: 20),
             ),
-         
+          ),
 
-
-          
-            ElevatedButton(
-              onPressed: () {
-                _saveFullName(_fullNameController.text);
-LocalStorage().setIsFirstTime(false);              },
-              child: Text('Save Full'),
+              
+             
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -237,50 +269,61 @@ class OnboardingPage3State extends State<OnboardingPage3> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color:  AppColors.primary,
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-          
-            Text(
-              "Select your image for your Profile",
-              style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 15),
-         
+    return SafeArea(
+      
+        child: Container(
+          color:  Color.fromARGB(255, 0, 242, 255),
+          child: Center(
+            
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+              Row(children: [
 
+         Center(
+           child: Text(
+                    "Select  Profile",
+                    style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+         ),
 
-          GestureDetector(
-              onTap: () {
-                getImage(_image, (image) {
-                  setState(() {
-                    _image = image;
-                  });
-                });
-              },
-              child: Container(
-                color: AppColors.primary,
-                child: Center(
-                  child: _image == null
-                      ? Text('Tap to select profile photo')
-                      : CircleAvatar(
-                          radius: 80,
-                          backgroundImage: FileImage(_image!),
-                        ),
+                IconButton(onPressed:(){}, icon: Icon(Icons.folder,color: Colors.white,size: 20,),),
+       
+              ],),
+                SizedBox(height: 15),
+             
+        
+        
+              GestureDetector(
+                  onTap: () {
+                    getImage(_image, (image) {
+                      setState(() {
+                        _image = image;
+                      });
+                    });
+                  },
+                  child: Container(
+                    color: AppColors.primary,
+                    child: Center(
+                      child: _image == null
+                          ? Text('Tap to select profile photo')
+                          : CircleAvatar(
+                              radius: 80,
+                              backgroundImage: FileImage(_image!),
+                            ),
+                    ),
+                  ),
                 ),
-              ),
+                ElevatedButton(
+                  onPressed: () {
+        LocalStorage().setIsFirstTime(false);              },
+                  child: Text('Save Full'),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {
-LocalStorage().setIsFirstTime(false);              },
-              child: Text('Save Full'),
-            ),
-          ],
+          ),
         ),
-      ),
+      
     );
   }
 }
@@ -289,15 +332,18 @@ LocalStorage().setIsFirstTime(false);              },
 class OnboardingPage4 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
-      child: Column(
-        children: [
-          Text("Welcome to Money Manangement "),
-          Center( 
-            child: Lottie.asset('assets/Animationa.json', width: 400),
-          ),
-        ],
+    return SafeArea(
+      child: Container(
+        color: Colors.blue,
+        child: Column(
+          children: [
+            Text("Authentication succussfull ",                  style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+),
+            Center( 
+              child: Lottie.asset('assets/Animationa.json', width: 400),
+            ),
+          ],
+        ),
       ),
     );
   }

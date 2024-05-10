@@ -18,7 +18,6 @@ import 'package:money_app/shared/utils/utils.dart';
 import 'package:money_app/shared/widgets/app_buttons.dart';
 import 'package:money_app/shared/widgets/app_progress.dart';
 import 'package:money_app/shared/widgets/error_screen.dart';
-import 'package:money_app/shared/widgets/menu_drawer_news.dart';
 import 'package:money_app/shared/widgets/responsive_view.dart';
 
 class TransactionsScreen extends GetView<TransactionsController> {
@@ -41,9 +40,7 @@ void  getImage(File? _image, Function(File) setImage) async {
 
 
   TransactionsScreen({Key? key}) : super(key: key);
-  void _navigateToMenuDrawer() {
-    Get.to(() => MenuDrawerNewsRoute());
-  }
+
 
   @override
   Widget build(BuildContext context) {
