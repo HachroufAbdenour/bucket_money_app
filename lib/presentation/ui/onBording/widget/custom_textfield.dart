@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:money_app/shared/constants/app_values.dart';
+import 'package:money_app/shared/styles/colors.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
@@ -59,5 +61,92 @@ class CustomTextField extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+
+
+
+
+
+Widget MyTextField({
+  required TextEditingController controller,
+  bool isObscure = false,
+  bool readOnly = false,
+  Widget? suffixIcon,
+  Widget? prefixIcon,
+  String? hintText,
+   TextStyle? hintStyle,
+  // int? maxLines,
+  String? Function(String?)? validator,
+  TextInputType? keyboardType,
+}) {
+  return Container(
+    padding: prefixIcon != null
+        ? const EdgeInsets.only(left: 0, right: 10)
+        : const EdgeInsets.symmetric(horizontal: 10),
+    decoration: BoxDecoration(
+      color: greyColor.withOpacity(.2),
+      borderRadius: BorderRadius.circular(10),
+    ),
+    child: TextFormField(
+      controller: controller,
+      cursorColor: blackColor,
+      obscureText: isObscure,
+      //maxLines: maxLines,
+      readOnly: readOnly,
+      validator: validator,
+      keyboardType: keyboardType,
+      autovalidateMode: AutovalidateMode.disabled,
+      decoration: InputDecoration(
+        suffixIcon: suffixIcon,
+        prefixIcon: prefixIcon,
+        hintText: hintText,
+                hintStyle: hintStyle ?? TextStyle(fontSize: 14, color: Colors.grey), // Apply default style if none provided
+
+        enabledBorder: InputBorder.none,
+        focusedBorder: InputBorder.none,
+        errorBorder: InputBorder.none,
+        focusedErrorBorder: InputBorder.none,
+      ),
+    ),
+  );
+}
+
+
+Widget MyFilledButton({
+  required Widget child,
+  required VoidCallback onPressed,
+  Color color =AppColors.primary,
+}) {
+  return ElevatedButton(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all(color),
+      shape: MaterialStateProperty.all(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+      elevation: MaterialStateProperty.all(0.0),
+    ),
+    onPressed: onPressed,
+    child: child,
+  );
+}
+
+
+class CustomText extends StatelessWidget {
+  const CustomText(this.text,{super.key,  this.fontName = 'Raleway', this.color = onBgTextColor,  this.fontSize ,  this.textAlign = TextAlign.start , this.fontWeight = FontWeight.normal,this.textOverflow = TextOverflow.visible,this.height});
+  final String text;
+  final Color color;
+  final double? fontSize ;
+  final TextAlign textAlign;
+  final FontWeight fontWeight;
+  final TextOverflow textOverflow;
+  final double? height; 
+  final String? fontName;
+  @override
+  Widget build(BuildContext context) {
+    return  Text(text,style: TextStyle(height: height, fontSize:  fontSize ?? 14,color: color,fontWeight: fontWeight,fontFamily: fontName),textAlign: textAlign,overflow: textOverflow,maxLines: null);
   }
 }

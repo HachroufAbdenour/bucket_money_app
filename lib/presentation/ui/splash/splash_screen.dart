@@ -19,7 +19,7 @@ class SplashScreen extends StatelessWidget {
                 Container(
                   color: Colors.blueAccent, // Set container color to blueAccent
                   child: Lottie.asset(
-                    'assets/lotties/Animationmoney.json', // Path to your Lottie animation file
+                    'assets/Animation01.json', // Path to your Lottie animation file
                     width: 300,
                     height: 300,
                     fit: BoxFit.contain,

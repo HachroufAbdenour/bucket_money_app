@@ -12,7 +12,7 @@ import 'package:money_app/presentation/ui/transactions/widgets/price_widget.dart
 import 'package:money_app/presentation/ui/transactions/widgets/transaction_item.dart';
 import 'package:money_app/shared/localization/keys.dart';
 import 'package:money_app/shared/enums/screen_enums.dart';
-import 'package:money_app/presentation/ui/onBording/view.dart';
+import 'package:money_app/presentation/ui/onbording/view.dart';
 import 'package:money_app/shared/utils/date_utils.dart';
 import 'package:money_app/shared/utils/utils.dart';
 import 'package:money_app/shared/widgets/app_buttons.dart';
@@ -130,7 +130,7 @@ GestureDetector(
       controller.setImagePath(pickedFile.path);
     }
   },
-  child: Icon(Icons.camera_alt), // Display camera icon over the avatar
+  child: Icon(Icons.camera_alt, color: Colors.white), // Display camera icon over the avatar
 ),
 
                           ],),

@@ -4,7 +4,8 @@ import 'package:money_app/presentation/bindings/splash_binding.dart';
 import 'package:money_app/presentation/bindings/transaction_details_binding.dart';
 import 'package:money_app/presentation/bindings/transactions_binding.dart';
 import 'package:money_app/presentation/router/routes.dart';
-import 'package:money_app/presentation/ui/onBording/view.dart';
+import 'package:money_app/presentation/ui/onbording/view.dart';
+import 'package:money_app/presentation/ui/onbording/view.dart';
 import 'package:money_app/presentation/ui/pay/pay_screen.dart';
 import 'package:money_app/presentation/ui/splash/splash_screen.dart';
 import 'package:money_app/presentation/ui/transaction_details/transaction_details_screen.dart';
@@ -39,7 +40,7 @@ class AppRouter {
     ),
         GetPage(
       name: AppRoutes.onBording,
-      page: () =>  OnboardView(),
+      page: () =>  View(),
       transition: _transition(),
     ),
   ];
