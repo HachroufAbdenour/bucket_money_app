@@ -14,6 +14,7 @@ import 'package:money_app/shared/enums/transaction_enums.dart';
 
 class TransactionsController extends GetxController {
   final LocalStorage _storage;
+
   final AccountRepository _accountRepository;
   final TransactionsRepository _transactionsRepository;
 
@@ -113,6 +114,16 @@ final _storagee = GetStorage();
       }
     }
   }
+
+
+
+  void deleteTransaction(String transactionId) {
+              _storage.deleteTransaction(transactionId);  
+              getTransactions();
+              // Call the delete function from the controller
+  update(); // This will trigger the UI update
+}
+
 
   void dropData() async {
     await _storage.clearBox();

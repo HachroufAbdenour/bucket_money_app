@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ffi';
 
 import 'package:get/get.dart';
@@ -43,6 +44,30 @@ static final LocalStorage _instance = LocalStorage._internal();
       _box.remove(_transactions),
     ]);
   }
+
+  void deleteTransaction(String transactionId) async {
+  var transactionsJson = _box.read('_transactions'); // Assuming transactions are stored as a JSON string.
+  if (transactionsJson != null) {
+    List transactions = jsonDecode(transactionsJson); // Decode the JSON to a List.
+
+    // Find the transaction with the given ID.
+    int indexToDelete = transactions.indexWhere((t) => t['transactionId'] == transactionId);
+
+    if (indexToDelete != -1) {
+      transactions.removeAt(indexToDelete); // Remove the transaction if found.
+      _box.write('_transactions', jsonEncode(transactions)); // Encode the list back to JSON and save.
+      print("Transaction deleted successfully: $transactionId");
+    update();
+      Get.offAllNamed('/transactions'); // Navigate after successful deletion.
+    } else {
+      print("Transaction ID not found: $transactionId");
+    }
+  } else {
+    print("No transactions found in storage.");
+  }
+}
+
+
 
 
 

@@ -24,6 +24,7 @@ class TransactionsScreen extends GetView<TransactionsController> {
   final _storage = GetStorage();
   File? _image;
 
+final local= LocalStorage();
 
 void  getImage(File? _image, Function(File) setImage) async {
   final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -263,9 +264,16 @@ GestureDetector(
             offstage: _checkDateSeparator(i),
             child: _buildDateSeparator(i),
           ),
-          TransactionItem(
-            item: transaction,
-            onTap: controller.goTransaction,
+          ListTile(
+            title: TransactionItem(
+              item: transaction,
+              onTap: controller.goTransaction,
+            ),
+            trailing: IconButton(
+          icon: Icon(Icons.delete, color: Colors.blue),
+          
+          onPressed: () => _sshowDeleteConfirmationDialog( transaction.transactionId!),
+        ),
           ),
           _bottomSeparator(
             i: i,
@@ -372,6 +380,37 @@ void _showDeleteConfirmationDialog(BuildContext context) {
 }
 
 
+void _sshowDeleteConfirmationDialog(String transactionId) {
+  showDialog(
+    context: Get.context!, // Using Get.context to access the context
+    builder: (_) { // You can use underscore since context is not directly used
+      return AlertDialog(
+        title: Text('Confirm Delete'),
+        content: Text('Are you sure you want to delete this transaction?'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Get.back(), // Using Get.back() to close dialogs
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+                    print('transaction Id Here :'+ transactionId);
+
+              print( transactionId);
+                    print('00000000000000');
+
+              controller.deleteTransaction(transactionId);  // Call the delete function from the controller
+                    print('1111111111111111111');
+
+              Get.offAllNamed('/transactions'); // Navigate away after deletion
+            },
+            child: Text('Delete', style: TextStyle(color: Colors.red)),
+          ),
+        ],
+      );
+    },
+  );
+}
 
 
   
