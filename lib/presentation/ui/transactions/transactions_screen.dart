@@ -63,8 +63,8 @@ void  getImage(File? _image, Function(File) setImage) async {
   onPressed: () {
     _showDeleteConfirmationDialog(context); // Show delete confirmation dialog
   },
-  icon: isApple() ? CupertinoIcons.delete : Icons.delete_outline,
-  color: Get.theme.appBarTheme.titleTextStyle?.color ?? Colors.white,
+  icon: isApple() ? CupertinoIcons.delete : Icons.delete,
+  color:  Colors.red[500],
   message: StringsKeys.clear,
 ),
               ],
@@ -270,7 +270,7 @@ GestureDetector(
               onTap: controller.goTransaction,
             ),
             trailing: IconButton(
-          icon: Icon(Icons.delete, color: Colors.blue),
+          icon: Icon(Icons.delete, color: Colors.red[500]  ),
           
           onPressed: () => _sshowDeleteConfirmationDialog( transaction.transactionId!),
         ),
@@ -371,7 +371,8 @@ void _showDeleteConfirmationDialog(BuildContext context) {
               controller.dropData();
               Navigator.of(context).pop(); // Close the dialog
             },
-            child: Text(StringsKeys.delete.tr),
+            child: Text(StringsKeys.delete.tr,style: TextStyle(color: Colors.red)),
+       
           ),
         ],
       );
@@ -385,12 +386,12 @@ void _sshowDeleteConfirmationDialog(String transactionId) {
     context: Get.context!, // Using Get.context to access the context
     builder: (_) { // You can use underscore since context is not directly used
       return AlertDialog(
-        title: Text('Confirm Delete'),
-        content: Text('Are you sure you want to delete this transaction?'),
+        title: Text(StringsKeys.deleteConfirmation),
+        content: Text(StringsKeys.areyousureyouwanttodelete),
         actions: <Widget>[
           TextButton(
             onPressed: () => Get.back(), // Using Get.back() to close dialogs
-            child: Text('Cancel'),
+            child: Text(StringsKeys.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -404,7 +405,7 @@ void _sshowDeleteConfirmationDialog(String transactionId) {
 
               Get.offAllNamed('/transactions'); // Navigate away after deletion
             },
-            child: Text('Delete', style: TextStyle(color: Colors.red)),
+            child: Text(StringsKeys.delete, style: TextStyle(color: Colors.red)),
           ),
         ],
       );
